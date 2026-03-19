@@ -12,7 +12,6 @@
 Settings:
   max_history: 7 # Include articles from the last N days (0 = no limit)
   load_images: true # Download and embed images in the EPUB
-  filename_template: "PL_Digest_{date}.epub"
 
   # ── Filename placeholders ──────────────────────────────────────────────────
   # {year}     - Year         (2026)
