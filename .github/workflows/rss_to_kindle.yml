@@ -1,0 +1,23 @@
+name: RSS to Kindle
+
+on:
+  schedule:
+    - cron: "0 1 * * 5" # Every Friday at 1 AM UTC
+  workflow_dispatch:
+
+jobs:
+  convert-and-send:
+    runs-on: ubuntu-latest
+
+    env:
+      SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+      SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
+      KINDLE_EMAIL: ${{ secrets.KINDLE_EMAIL }}
+
+    steps:
+      - name: Run RSS → EPUB → Kindle
+        uses: ekarlsn/KindleRSS@v5
+        with:
+          config-path: config.yaml

@@ -1,0 +1,109 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Kindle RSS Digest — Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# This is the main configuration file for your Kindle RSS digest.
+# Edit the Settings section to customize output behavior, then add or remove
+# feeds from the Feeds section to match your interests.
+#
+# See the README for full documentation on all options.
+# ─────────────────────────────────────────────────────────────────────────────
+
+Settings:
+  max_history: 7 # Include articles from the last N days (0 = no limit)
+  load_images: true # Download and embed images in the EPUB
+  filename_template: "PL_Digest_{date}.epub"
+
+  # ── Filename placeholders ──────────────────────────────────────────────────
+  # {year}     - Year         (2026)
+  # {month}    - Month        (01)
+  # {day}      - Day          (12)
+  # {hour}     - Hour         (09)
+  # {minute}   - Minute       (30)
+  # {date}     - Human date   (January 12, 2026)
+  # {time}     - Human time   (09:30)
+  # {datetime} - Date & time  (January 12, 2026_09:30)
+  #
+  # Example: "Digest_{date}.epub" → "Digest_January 12, 2026.epub"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Feeds
+# ─────────────────────────────────────────────────────────────────────────────
+Feeds:
+  # ── Systems & Low-Level ───────────────────────────────────────────────────
+
+  - url: "https://blog.rust-lang.org/feed.xml"
+    title: "Rust Language Blog"
+    # Release announcements, RFC decisions, and deep dives from the Rust team.
+
+  - url: "https://go.dev/blog/feed.atom"
+    title: "The Go Blog"
+    # Official blog from the Go team at Google: releases, proposals, and guides.
+
+  - url: "https://ziglang.org/news/index.xml"
+    title: "Zig Language News"
+    # Announcements and updates from the Zig Software Foundation.
+
+  # ── JVM & Functional ──────────────────────────────────────────────────────
+  - url: "https://blog.jetbrains.com/kotlin/feed/"
+    title: "Kotlin Blog"
+    # Official Kotlin blog by JetBrains: releases, features, and best practices.
+
+  - url: "https://www.scala-lang.org/blog/feed.xml"
+    title: "Scala Language Blog"
+    # Release notes, roadmap updates, and community highlights from the Scala team.
+
+  # ── Scripting & Dynamic ───────────────────────────────────────────────────
+  - url: "https://blog.python.org/feeds/posts/default"
+    title: "Python Insider"
+    # The official Python core developer blog: releases, PEPs, and security advisories.
+
+  - url: "https://www.ruby-lang.org/en/feeds/news.rss"
+    title: "Ruby Language News"
+    # Release announcements and security notices from the Ruby core team.
+
+  # ── Web & Typed JavaScript ────────────────────────────────────────────────
+  - url: "https://devblogs.microsoft.com/typescript/feed/"
+    title: "TypeScript Blog"
+    # Release announcements and deep dives from the TypeScript team at Microsoft.
+
+  # ── Platforms & Runtimes ──────────────────────────────────────────────────
+  - url: "https://devblogs.microsoft.com/dotnet/feed/"
+    title: ".NET Blog"
+    # Covers C#, F#, ASP.NET Core, MAUI, and the broader .NET ecosystem.
+
+  - url: "https://www.swift.org/atom.xml"
+    title: "Swift.org Blog"
+    # Official announcements from the Swift core team: releases, evolution, and tooling.
+# ─────────────────────────────────────────────────────────────────────────────
+# Feed Configuration Examples
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# The feeds above use Readability-based full-text extraction (the default).
+# Below are commented-out examples showing other extraction modes you can apply
+# to any feed entry above by adding the corresponding keys.
+#
+# ── Disable a feed temporarily (without deleting it) ────────────────────────
+#
+#  - url: "https://example.com/feed.xml"
+#    title: "Paused Feed"
+#    enabled: false
+#
+# ── Use CSS selectors for precise content extraction ────────────────────────
+#
+#  - url: "https://example.com/feed.xml"
+#    title: "CSS Selector Feed"
+#    resolve_link:
+#      method: "selector"
+#      selectors:
+#        content: "article, .post-content, main"
+#        remove: ".ads, .sidebar, .comments, script, style"
+#      fallback: "readability"   # fall back to Readability if selector fails
+#
+# ── Use only the RSS summary (no full-text fetch) ───────────────────────────
+#
+#  - url: "https://example.com/feed.xml"
+#    title: "Summary Only Feed"
+#    resolve_link: false
+#
+# ─────────────────────────────────────────────────────────────────────────────
