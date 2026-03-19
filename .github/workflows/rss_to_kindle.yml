@@ -18,6 +18,6 @@ jobs:
 
     steps:
       - name: Run RSS → EPUB → Kindle
-        uses: ekarlsn/KindleRSS@v5
+        uses: ekarlsn/KindleRSS@v6
         with:
           config-path: config.yaml
