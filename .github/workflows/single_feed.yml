@@ -1,0 +1,44 @@
+name: Single Feed to Kindle
+
+on:
+  workflow_dispatch:
+    inputs:
+      feed-url:
+        description: "RSS feed URL"
+        required: true
+      feed-title:
+        description: "Feed title (defaults to the URL if left empty)"
+        required: false
+      resolve-link:
+        description: "Link resolution method: trafilatura (default), readability, or false (use RSS summary as-is)"
+        required: false
+        default: "trafilatura"
+      load-images:
+        description: "Download and embed images (true / false)"
+        required: false
+        default: "true"
+      max-history:
+        description: "Keep articles from the last N days (0 = no limit)"
+        required: false
+        default: "7"
+
+jobs:
+  single-feed:
+    runs-on: ubuntu-latest
+
+    env:
+      SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+      SENDER_PASSWORD: ${{ secrets.SENDER_PASSWORD }}
+      KINDLE_EMAIL: ${{ secrets.KINDLE_EMAIL }}
+
+    steps:
+      - name: Run single feed → EPUB → Kindle
+        uses: ekarlsn/KindleRSS@v8
+        with:
+          feed-url: ${{ inputs.feed-url }}
+          feed-title: ${{ inputs.feed-title }}
+          resolve-link: ${{ inputs.resolve-link }}
+          load-images: ${{ inputs.load-images }}
+          max-history: ${{ inputs.max-history }}
